@@ -1,3 +1,4 @@
+from fractions import Fraction
 from sort import Sort_
 from downloader import Downloader_
 from tkinter import messagebox
@@ -26,7 +27,7 @@ def get_res(entry_url, entry_path):
         messagebox.showerror("showerror", "You entered the wrong path")
         return -1
 
-    if (path is "" or url == ""):
+    if (path == "" or url == ""):
         messagebox.showerror("showerror", "You did't fill a field")
         return -1
 
@@ -61,56 +62,55 @@ def get_res(entry_url, entry_path):
 
     messagebox.showinfo("show_info", "Installation success")
     return 0
-    
-def main():
-    
-    sites = Downloader_.get_lists_of_hosts(Downloader_)
-    text_site = "\n"
-    for site in sites:
-        text_site += site +'\n'
 
+
+def main_():
     window = tk.Tk()
     window.title("Downloading imgs")
-    window.geometry("1000x700")
 
-    label1 = tk.Label(window, width=50, text="Downloading", anchor='w')
-    label1.config(font=("Raleway", 16), justify=tk.CENTER)
-    label1.pack(side=tk.TOP, pady=20, )
+    main_label = tk.Label(window, text="Downloading images", padx=20, pady=25)
+    main_label.config(font=("Raleway", 32))
+    main_label.grid(row=0, column=0, columnspan=2)
+
+    
+    list_of_availble_sites = Downloader_.get_lists_of_hosts(Downloader_)
+    str_list_of_availble_sites = ""
+    for site in list_of_availble_sites:
+        str_list_of_availble_sites+= site + '\n'
 
 
-    lable_frame = tk.LabelFrame(window, text="Available sites")
-    label2 = tk.Label(lable_frame, width=50, text=text_site , anchor='w')
-    label2.config(font=("Raleway", 16))
-    label2.pack()
-    lable_frame.pack(side=tk.RIGHT, pady=20)
+    #CLUMN0 : row 0 The list of availbe sites is there
+    frame_of_availble_sites_label = tk.LabelFrame(window, text="Availble sites:", font=("Raleway", 14))
+    availble_sites_label = tk.Label(frame_of_availble_sites_label, text=str_list_of_availble_sites, padx=8, pady=5)
+    availble_sites_label.config(font=("Raleway", 16))
+    availble_sites_label.pack()
+    frame_of_availble_sites_label.grid(row=1, column=0, rowspan=3)
 
-    label3 = tk.Label(window, width=50, text="url", anchor='w')
-    label3.config(font=("Raleway", 16))
-    label3.pack(side=tk.RIGHT, pady=20)
+    
 
-    entry1 = tk.Entry(window, width=50)
-    entry1.pack(side=tk.TOP, pady=20)
+    #COLUMN1 : row 1 - There is url placed
+    row1 = tk.Frame(window)
+    url_label = tk.Label(row1, text="url")
+    url_label.config(font=("Raleway", 16))
+    url_label.pack(side=tk.LEFT)
+    url_entry = tk.Entry(row1)
+    url_entry.pack(side=tk.RIGHT, padx=15)
+    row1.grid(row=1, column=1)
 
-    label4 = tk.Label(window, width=50, text="path", anchor='w')
-    label4.config(font=("Raleway", 16))
-    label4.pack(side=tk.TOP, pady=20)
+    row2 = tk.Frame(window)
+    path_label = tk.Label(row2, text="path")
+    path_label.config(font=("Raleway", 16))
+    path_label.pack(side=tk.LEFT)
+    path_entry = tk.Entry(row2)
+    path_entry.pack(side=tk.RIGHT, padx=15)
+    row2.grid(row=2, column=1)
 
-    entry2 = tk.Entry(window, width=50)
-    entry2.pack(side=tk.TOP, pady=20)
-
-    b1 = tk.Button(window, text="CLICK ME!!!!!!", width=50, command=lambda : get_res(entry1, entry2))
-    b1.config(font=("Raleway", 16), justify=tk.CENTER)
-    b1.pack(side=tk.TOP, pady=20)
+    buttom = tk.Button(window, text="CLICK ME!!!", command=lambda : get_res(url_entry, path_entry))
+    buttom.grid(row=3, column=1)
 
 
     window.mainloop()
 
-
-
 if __name__ == "__main__":
-    main()
-    # lf = "https://docs.python.org/3/library/re.html"
-    # split = re.split("/", lf)
-    # print(split)
-    # print(split[2])
-    # print(re.search("//.+[.].+[.].+/",lf).group(0))
+    main_()
+    

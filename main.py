@@ -49,9 +49,4 @@ def main():
 
 if (__name__ == "__main__"):
     main()
-    # dw = Downloader_("1", "https://tkr083.com/webtoon/416714/5627", "D:\\manglib\\test\\1")
-    # dw.run_download()
-
-    # sr = Sort_("D:\\manglib\\test\\1")
-    # sr.run_sorting()
     
